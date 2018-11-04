@@ -19,11 +19,11 @@ namespace Demo2
                 }
                 Console.WriteLine("修改");
                 //修改
-                var editdep = context.Departments.SingleOrDefault(x => x.Name == "电子信息工程学院");
+                var editdep = context.Departments.SingleOrDefault(x => x.Name == "财经与物流学院");
                 if (editdep != null)
                 {
-                    editdep.Name = "电子信息工程学院";
-                    editdep.SortCode = "008";
+                    editdep.Name = "财经与物流学院";
+                    editdep.SortCode = "009";
                     context.SaveChanges();
                 }
                 else

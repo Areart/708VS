@@ -23,9 +23,9 @@ namespace Demo1
                 var newDep = new Departments
                 {
                     ID = Guid.NewGuid(),
-                    Name = "环境与食品学院",
-                    Dscn = "环境与食品检查",
-                    SortCode = "007"
+                    Name = "财经与物流学院",
+                    Dscn = "财经与物流学院",
+                    SortCode = "009"
                 };
 
                 // 添加
@@ -39,7 +39,7 @@ namespace Demo1
                 //显示新纪录
                 foreach (var d in context.Departments.OrderBy(x => x.SortCode).ToList())
                 {
-                    Console.WriteLine("编号：{0},名称：{1},说明{2}", d.SortCode, d.Name, d.Dscn);
+                    Console.WriteLine("编号：{0},名称：{1},说明：{2}", d.SortCode, d.Name, d.Dscn);
                 }
                 Console.ReadKey();
             }
