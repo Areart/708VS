@@ -11,10 +11,10 @@ namespace Demo1
         static void Main(string[] args)
         {
             //使用数据上下文进行数据操作，using表示上下文代码的范围，执行完后内存会自动释放
-            using(var dep=new CuresContext())
+            using(var context=new CuresContext())
             {
                 //.where .orderby  .tolist()
-                foreach (var d in dep.Departments.OrderBy(x=>x.SortCode).ToList())
+                foreach (var d in context.Departments.OrderBy(x=>x.SortCode).ToList())
                 {
                     Console.WriteLine("编号：{0},名称：{1},说明{2}",d.SortCode,d.Name,d.Dscn);
                 }
@@ -27,13 +27,28 @@ namespace Demo1
                     Dscn = "环境与食品检查",
                     SortCode="007"
                 };
-                //把新对象添加到上下文中
-                dep.Departments.Add(newDep);
-                //保存到数据库中
-                dep.SaveChanges();
 
+                //添加
+                //把新对象添加到上下文中
+              //  context.Departments.Add(newDep);
+                //保存到数据库中
+              //  context.SaveChanges();
+
+               
+
+
+                //修改
+                var editdep = context.Departments.SingleOrDefault(x=>x.Name== "电子信息工程学院");
+                if (editdep != null)
+                {
+                    editdep.Name = "电子信息工程学院";
+                    editdep.SortCode = "008";
+                    context.SaveChanges();
+                }
+                else
+                    Console.WriteLine("未找到该纪录");
                 //显示新纪录
-                foreach (var d in dep.Departments.OrderBy(x => x.SortCode).ToList())
+                foreach (var d in context.Departments.OrderBy(x => x.SortCode).ToList())
                 {
                     Console.WriteLine("编号：{0},名称：{1},说明{2}", d.SortCode, d.Name, d.Dscn);
                 }
