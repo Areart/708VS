@@ -25,28 +25,17 @@ namespace Demo1
                     ID = Guid.NewGuid(),
                     Name = "环境与食品学院",
                     Dscn = "环境与食品检查",
-                    SortCode="007"
+                    SortCode = "007"
                 };
 
-                //添加
+                // 添加
                 //把新对象添加到上下文中
-              //  context.Departments.Add(newDep);
+                context.Departments.Add(newDep);
                 //保存到数据库中
-              //  context.SaveChanges();
-
-               
+                  context.SaveChanges();
 
 
-                //修改
-                var editdep = context.Departments.SingleOrDefault(x=>x.Name== "电子信息工程学院");
-                if (editdep != null)
-                {
-                    editdep.Name = "电子信息工程学院";
-                    editdep.SortCode = "008";
-                    context.SaveChanges();
-                }
-                else
-                    Console.WriteLine("未找到该纪录");
+             
                 //显示新纪录
                 foreach (var d in context.Departments.OrderBy(x => x.SortCode).ToList())
                 {
