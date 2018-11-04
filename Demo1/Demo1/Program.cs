@@ -10,11 +10,32 @@ namespace Demo1
     {
         static void Main(string[] args)
         {
+            //使用数据上下文进行数据操作，using表示上下文代码的范围，执行完后内存会自动释放
             using(var dep=new CuresContext())
             {
+                //.where .orderby  .tolist()
                 foreach (var d in dep.Departments.OrderBy(x=>x.SortCode).ToList())
                 {
                     Console.WriteLine("编号：{0},名称：{1},说明{2}",d.SortCode,d.Name,d.Dscn);
+                }
+                Console.WriteLine("添加一条新纪录后");
+
+                var newDep = new Departments
+                {
+                    ID = Guid.NewGuid(),
+                    Name = "环境与食品学院",
+                    Dscn = "环境与食品检查",
+                    SortCode="007"
+                };
+                //把新对象添加到上下文中
+                dep.Departments.Add(newDep);
+                //保存到数据库中
+                dep.SaveChanges();
+
+                //显示新纪录
+                foreach (var d in dep.Departments.OrderBy(x => x.SortCode).ToList())
+                {
+                    Console.WriteLine("编号：{0},名称：{1},说明{2}", d.SortCode, d.Name, d.Dscn);
                 }
                 Console.ReadKey();
             }
